@@ -2,14 +2,16 @@
 Detects MIME type based on file content or file extension
 
 ## Description
-This project was originally based on parsing  /usr/share/mime/magic (Kali Linux path) file (location may differ). More information about file structure [here](https://developer.gnome.org/shared-mime-info-spec/) at "The magic files" section. This file contains mime type definitions with a number of rule sets. They are applied iteratively to the file content to guess given file mime type.
+This project was originally based on parsing  **/usr/share/mime/magic** (Kali Linux) file (**mime database**). Location may differ. More information about this file structure could be found [here](https://developer.gnome.org/shared-mime-info-spec/) ("the magic files" section). 
 
-Original file's format (calling **old**) is hard to modify it according to your (mine, for instance) needs. I decided to move on to json file format (calling **new**) with similary capabilities and some new features. New format could be easily modified and updated with new rule sets
+This file contains mime type definitions with a number of rule sets, which are applied iteratively to the given file's content in order to guess mime type(s).
 
-Both formats are supported for now. Conversion from the old to the new format is supported too. Detection by extension can be used only with new file format. Template original and json files **will be** included soon.
+Original file's format (**old**) is hard to modify according to your needs. I decided to move on to json file format (**new**) with similary capabilities and some new features. New format could be easily modified and updated with new rule sets and mime type definitions.
+
+Both database formats are supported. Conversion from the old to the new database format is supported. Detection by extension can be used only with new file format. Template original and json files **will be** included soon.
 
 ## Structure
-Each MIME definition contains a list of rule sets. Each rule set contains an hierarchical list of rules.
+Each MIME definition contains a list of rule sets. Each rule set contains an hierarchical list of rules. Rule set pseudocode:
 ```C#
 //  Level 0 rules: Rule 0
 //  Level 1 rules: Rule 1, Rule 2, Rule 3
@@ -17,9 +19,9 @@ Each MIME definition contains a list of rule sets. Each rule set contains an hie
 //  Level 3 rules: Rule 5, Rule 6
 //	...
 ```
-This ruleset is applied in the following manner.
+When this ruleset is applied, result will be calculated in the following manner:
 ```C#
-//  Result = 0 && (1 || 2 || 3) && 4 && (5 || 6)...
+//  Result (boolean) = 0 && (1 || 2 || 3) && 4 && (5 || 6)...
 ```
 Rule example:
 ```C#
@@ -64,10 +66,13 @@ using (MimeSharp.CMimeSharp MS = new MimeSharp.CMimeSharp(MagicFile, MimeSharp.E
     //  If no errors occured during reading
     if (ErrorMessage == null)
     {
-		//	
+		//	Mime type detection
         try
         {
+			//	Multiple results could be returned
             List<MimeSharp.CType> ContentMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeSharp.dll"));
+
+			//	Only first result will be returned
             List<MimeSharp.CType> ExtensionMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeSharp.dll"), true);
         }
 		//	Catch IO exception if occured
