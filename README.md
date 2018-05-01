@@ -4,7 +4,7 @@ Detects MIME type based on file content or file extension
 ## Description
 This project was originally based on parsing  **/usr/share/mime/magic** (Kali Linux) file (**mime database**). Location may differ. More information about this file structure could be found [here](https://developer.gnome.org/shared-mime-info-spec/) ("the magic files" section). 
 
-This file contains mime type definitions with a number of rule sets, which are applied iteratively to the given file's content in order to guess mime type(s).
+This file contains mime type definitions with several rule sets, which are applied iteratively to the given file's content to guess mime type(s).
 
 Original file's format (**old**) is hard to modify according to your needs. I decided to move on to json file format (**new**) with similary capabilities and some new features. New format could be easily modified and updated with new rule sets and mime type definitions.
 
