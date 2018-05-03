@@ -15,17 +15,17 @@ namespace MimeTest
                 JsonMagicFile = Path.Combine(Environment.CurrentDirectory, "magic_json");
 
             //  Convert from original format to json
-            MimeSharp.CMimeSharp.ConvertFromOriginalToJson("magic_original", "magic_json_convert_test", out string ConvertError);
+            MimeMagicSharp.CMimeMagicSharp.ConvertFromOriginalToJson("magic_original", "magic_json_convert_test", out string ConvertError);
 
             //  Read and detect
-            using (MimeSharp.CMimeSharp MS = new MimeSharp.CMimeSharp(JsonMagicFile, MimeSharp.EMagicFileType.Json, out string ErrorMessage))
+            using (MimeMagicSharp.CMimeMagicSharp MS = new MimeMagicSharp.CMimeMagicSharp(JsonMagicFile, MimeMagicSharp.EMagicFileType.Json, out string ErrorMessage))
             {
                 //  If no errors occured during reading
                 if (ErrorMessage == null)
                 {
                     try
                     {
-                        List<MimeSharp.CType> Results = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeSharp.dll"));
+                        List<MimeMagicSharp.CType> Results = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"));
                     }
                     catch (IOException) { }
                 }

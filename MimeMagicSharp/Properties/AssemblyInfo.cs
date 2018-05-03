@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("MimeSharp")]
+[assembly: AssemblyTitle("MimeMagicSharp")]
 [assembly: AssemblyDescription("Detect mime type based on file contents or extension")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("sb")]
-[assembly: AssemblyProduct("MimeSharp")]
+[assembly: AssemblyProduct("MimeMagicSharp")]
 [assembly: AssemblyCopyright("© stellarbears")]
 [assembly: AssemblyTrademark("sb")]
 [assembly: AssemblyCulture("")]

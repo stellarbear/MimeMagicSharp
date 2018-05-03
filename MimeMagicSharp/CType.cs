@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MimeSharp
+namespace MimeMagicSharp
 {
     //  Mime type representation
     public class CType

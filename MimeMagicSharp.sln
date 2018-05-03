@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeSharp", "MimeSharp\MimeSharp.csproj", "{D42F8CBC-7193-49C8-9797-3C73B3591F46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeMagicSharp", "MimeMagicSharp\MimeMagicSharp.csproj", "{D42F8CBC-7193-49C8-9797-3C73B3591F46}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeTest", "MimeTest\MimeTest.csproj", "{C05CAF26-928B-4671-8F52-0672E92C1A90}"
 	ProjectSection(ProjectDependencies) = postProject

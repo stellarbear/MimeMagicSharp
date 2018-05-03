@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MimeSharp
+namespace MimeMagicSharp
 {
     //  "Read mime data file" class
     class CReader : IDisposable
@@ -237,7 +237,7 @@ namespace MimeSharp
                 }
             }
 
-            return (Result.Count > 0) ? Result : new List<CType>() { new CType(CMimeSharp.Unknown) };
+            return (Result.Count > 0) ? Result : new List<CType>() { new CType(CMimeMagicSharp.Unknown) };
         }
         //  Detect mime type base on extension (new format only)
         public List<CType> GetMimeTypeByExtension(string Filename, bool Single = false)
@@ -258,7 +258,7 @@ namespace MimeSharp
                 }
             }
 
-            return (Result.Count > 0) ? Result : new List<CType>() { new CType(CMimeSharp.Unknown) };
+            return (Result.Count > 0) ? Result : new List<CType>() { new CType(CMimeMagicSharp.Unknown) };
         }
 
         //  Save class to disk (conversion)

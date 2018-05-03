@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MimeSharp
+namespace MimeMagicSharp
 {
     //  Rule representation
     public class CRule

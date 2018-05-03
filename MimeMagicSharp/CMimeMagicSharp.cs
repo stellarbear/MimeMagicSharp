@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MimeSharp
+namespace MimeMagicSharp
 {
     //  New (json) or old (original) mime database format
     public enum EMagicFileType { Json, Original }
 
-    //  Interface to MimeSharp library
-    public class CMimeSharp : IDisposable
+    //  Interface to MimeMagicSharp library
+    public class CMimeMagicSharp : IDisposable
     {
         //  Default mime type
         public static string Unknown = "[application/unknown]";
@@ -19,7 +19,7 @@ namespace MimeSharp
         private CReader MimeReader;
 
         //  Constructor section
-        public CMimeSharp(string MagicFilePath, EMagicFileType MagicFileType, out string ErrorMessage)
+        public CMimeMagicSharp(string MagicFilePath, EMagicFileType MagicFileType, out string ErrorMessage)
         {
             MimeReader = new CReader(MagicFilePath, MagicFileType, out ErrorMessage);
         }

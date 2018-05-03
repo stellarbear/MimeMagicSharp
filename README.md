@@ -1,4 +1,4 @@
-# MimeSharp
+# MimeMagicSharp
 Detects MIME type based on file content or file extension
 
 ## Description
@@ -61,7 +61,7 @@ Rule example:
 string MagicFile = Path.Combine(Environment.CurrentDirectory, "magic"),
 
 //  Parse DB file
-using (MimeSharp.CMimeSharp MS = new MimeSharp.CMimeSharp(MagicFile, MimeSharp.EMagicFileType.Json, out string ErrorMessage))
+using (MimeMagicSharp.CMimeMagicSharp MS = new MimeMagicSharp.CMimeMagicSharp(MagicFile, MimeMagicSharp.EMagicFileType.Json, out string ErrorMessage))
 {
     //  If no errors occured during reading
     if (ErrorMessage == null)
@@ -70,10 +70,10 @@ using (MimeSharp.CMimeSharp MS = new MimeSharp.CMimeSharp(MagicFile, MimeSharp.E
         try
         {
 			//	Multiple results could be returned
-            List<MimeSharp.CType> ContentMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeSharp.dll"));
+            List<MimeMagicSharp.CType> ContentMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"));
 
 			//	Only first result will be returned
-            List<MimeSharp.CType> ExtensionMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeSharp.dll"), true);
+            List<MimeMagicSharp.CType> ExtensionMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"), true);
         }
 		//	Catch IO exception if occured
         catch (IOException) { }
@@ -85,7 +85,7 @@ using (MimeSharp.CMimeSharp MS = new MimeSharp.CMimeSharp(MagicFile, MimeSharp.E
 ```
 Convertion from original (old) format to json (new) is supported 
 ```C#
-MimeSharp.CMimeSharp.ConvertFromOriginalToJson("magic_original", "magic_json_convert_test", out string ConvertError);
+MimeMagicSharp.CMimeMagicSharp.ConvertFromOriginalToJson("magic_original", "magic_json_convert_test", out string ConvertError);
 ```
 
 ## Limitations
