@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,12 @@ namespace MimeMagicSharp
     {
         //  Default mime type
         public static string Unknown = "[application/unknown]";
+
+        //  Get dll version
+        public static Version GetVersion()
+        {
+            return Assembly.GetExecutingAssembly().GetName().Version;
+        }
 
         //  Mime database reader
         private CReader MimeReader;

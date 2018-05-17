@@ -14,6 +14,9 @@ namespace MimeTest
             string OriginalMagicFile = Path.Combine(Environment.CurrentDirectory, "magic_original"),
                 JsonMagicFile = Path.Combine(Environment.CurrentDirectory, "magic_json");
 
+            //  Get version
+            MimeMagicSharp.CMimeMagicSharp.GetVersion();
+
             //  Convert from original format to json
             MimeMagicSharp.CMimeMagicSharp.ConvertFromOriginalToJson("magic_original", "magic_json_convert_test", out string ConvertError);
 
