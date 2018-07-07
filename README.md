@@ -60,22 +60,21 @@ Rule example:
 //	Database File (new or old)
 string MagicFile = Path.Combine(Environment.CurrentDirectory, "magic"),
 
-//  Parse DB file
 using (MimeMagicSharp.CMimeMagicSharp MS = new MimeMagicSharp.CMimeMagicSharp(MagicFile, MimeMagicSharp.EMagicFileType.Json))
 {
-	//	Mime type detection
-	try
-	{
-		//	Multiple results could be returned
-		List<MimeMagicSharp.CType> ContentMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"));
+   try
+   {
+      //   Multiple results could be returned
+      List<MimeMagicSharp.CType> ContentMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"));
 
-		//	Only first result will be returned
-		List<MimeMagicSharp.CType> ExtensionMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"), true);
+      //   Only first result will be returned
+      List<MimeMagicSharp.CType> ExtensionMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"), true);
         
     }
-	//	Handle errors
     catch (Exception Ex)
-    { }
+    { 
+       //   Handle errors
+    }
 }
 ```
 Convertion from original (old) format to json (new) is supported 
