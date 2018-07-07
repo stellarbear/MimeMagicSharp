@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MimeMagicSharp
 {
@@ -15,24 +14,23 @@ namespace MimeMagicSharp
         [JsonProperty("MimeTypes")] List<CType> Types;
 
         //  Constructor section
-        public CReader(string MagicFilename, EMagicFileType FileType, out string ErrorMessage)
+        public CReader(string MagicFilename, EMagicFileType FileType)
         {
-            ErrorMessage = null;
             if (File.Exists(MagicFilename))
             {
                 switch (FileType)
                 {
                     case EMagicFileType.Json:
-                        Types = ReadJson(MagicFilename, out ErrorMessage);
+                        Types = ReadJson(MagicFilename);
                         break;
                     case EMagicFileType.Original:
-                        Types = ReadOriginal(MagicFilename, out ErrorMessage);
+                        Types = ReadOriginal(MagicFilename);
                         break;
                 }
             }
             else
             {
-                ErrorMessage = "File does not exist";
+                throw new IOException($"File does not exist: {MagicFilename}");
             }
         }
         //  Destructor section
@@ -43,22 +41,20 @@ namespace MimeMagicSharp
         }
 
         //  Read new format
-        private List<CType> ReadJson(string Filename, out string ErrorMessage)
+        private List<CType> ReadJson(string Filename)
         {
-            ErrorMessage = null;
             List<CType> ResultMimeSet = new List<CType>();
 
             try { ResultMimeSet = JsonConvert.DeserializeObject<List<CType>>(ReadFile(Filename)); }
-            catch (Exception Ex) { ErrorMessage = Ex.Message; return null; }
+            catch (Exception Ex) { throw new Exception($"Error during deserialization: {Ex.Message}"); }
 
             return ResultMimeSet;
         }
         //  Read old format
-        private List<CType> ReadOriginal(string Filename, out string ErrorMessage)
+        private List<CType> ReadOriginal(string Filename)
         {
             int MagicSize = Convert.ToInt32((new FileInfo(Filename)).Length);
             byte[] FileHeader = ReadNBytes(Filename, MagicSize);
-            ErrorMessage = null;
 
             List<CType> ResultMimeSet = new List<CType>();
             CType MimeType = new CType();
@@ -107,20 +103,14 @@ namespace MimeMagicSharp
                 if (FileHeader[InnerPointer] == 0x3E /*>*/)
                     InnerPointer++;
                 else
-                {
-                    ErrorMessage = "Error at " + (InnerPointer) + ": Expected: >(0x3E)";
-                    return null;
-                }
+                    throw new Exception($"Error during parsing at: {InnerPointer}. Expected: >(0x3E)");
 
                 //  Before StartOffset is always expected "="
                 StartOffset = GetNumberFromByteArrayAtOffset(FileHeader, ref InnerPointer);
                 if (FileHeader[InnerPointer] == 0x3D /*=*/)
                     InnerPointer++;
                 else
-                {
-                    ErrorMessage = "Error at " + (InnerPointer) + ": Expected: =(0x3D)";
-                    return null;
-                }
+                    throw new Exception($"Error during parsing at: {InnerPointer}. Expected: =(0x3D)");
 
                 //  Get body length
                 ValueLength = GetByteArrayByLength(FileHeader, ref InnerPointer, 2)[1];
@@ -145,8 +135,7 @@ namespace MimeMagicSharp
                         RangeLength = GetNumberFromByteArrayAtOffset(FileHeader, ref InnerPointer);
                         break;
                     default:
-                        ErrorMessage = "Error at " + (InnerPointer) + ": Expected: \n(0x0A), &(0x26), ~(0x7E), +(0x2B)";
-                        return null;
+                        throw new Exception($"Error during parsing at: {InnerPointer}. Expected (one from): \n(0x0A), &(0x26), ~(0x7E), +(0x2B)");
                 }
 
                 //  If Indent was absent, new rule set, containing rule, is created, elsecase rule is appended to the last rule set

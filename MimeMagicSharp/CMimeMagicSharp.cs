@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MimeMagicSharp
 {
@@ -26,9 +23,9 @@ namespace MimeMagicSharp
         private CReader MimeReader;
 
         //  Constructor section
-        public CMimeMagicSharp(string MagicFilePath, EMagicFileType MagicFileType, out string ErrorMessage)
+        public CMimeMagicSharp(string MagicFilePath, EMagicFileType MagicFileType)
         {
-            MimeReader = new CReader(MagicFilePath, MagicFileType, out ErrorMessage);
+            MimeReader = new CReader(MagicFilePath, MagicFileType);
         }
         //  Destructor section
         public void Dispose()
@@ -48,9 +45,9 @@ namespace MimeMagicSharp
         }
 
         //  Convert from old (original) format to new (json)
-        public static void ConvertFromOriginalToJson(string FilenameFrom, string FilenameTo, out string ErrorMessage)
+        public static void ConvertFromOriginalToJson(string FilenameFrom, string FilenameTo)
         {
-            CReader MimeReader = new CReader(FilenameFrom, EMagicFileType.Original, out ErrorMessage);
+            CReader MimeReader = new CReader(FilenameFrom, EMagicFileType.Original);
             MimeReader.SaveLocal(FilenameTo);
         }
     }

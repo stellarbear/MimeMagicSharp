@@ -1,5 +1,5 @@
 # MimeMagicSharp
-Detects MIME type based on file content or file extension
+Detects MIME type based on file content or file extension. [Nuget package](https://www.nuget.org/packages/MimeMagicSharp/ is available. Sample are files included.
 
 ## Description
 This project was originally based on parsing  **/usr/share/mime/magic** (Kali Linux) file (**mime database**). Location may differ. More information about this file structure could be found [here](https://developer.gnome.org/shared-mime-info-spec/) ("the magic files" section). 
@@ -61,25 +61,20 @@ Rule example:
 string MagicFile = Path.Combine(Environment.CurrentDirectory, "magic"),
 
 //  Parse DB file
-using (MimeMagicSharp.CMimeMagicSharp MS = new MimeMagicSharp.CMimeMagicSharp(MagicFile, MimeMagicSharp.EMagicFileType.Json, out string ErrorMessage))
+using (MimeMagicSharp.CMimeMagicSharp MS = new MimeMagicSharp.CMimeMagicSharp(MagicFile, MimeMagicSharp.EMagicFileType.Json))
 {
-    //  If no errors occured during reading
-    if (ErrorMessage == null)
-    {
-		//	Mime type detection
-        try
-        {
-			//	Multiple results could be returned
-            List<MimeMagicSharp.CType> ContentMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"));
+	//	Mime type detection
+	try
+	{
+		//	Multiple results could be returned
+		List<MimeMagicSharp.CType> ContentMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"));
 
-			//	Only first result will be returned
-            List<MimeMagicSharp.CType> ExtensionMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"), true);
-        }
-		//	Catch IO exception if occured
-        catch (IOException) { }
+		//	Only first result will be returned
+		List<MimeMagicSharp.CType> ExtensionMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"), true);
+        
     }
 	//	Handle errors
-    else
+    catch (Exception Ex)
     { }
 }
 ```
