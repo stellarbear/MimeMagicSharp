@@ -1,5 +1,5 @@
 # MimeMagicSharp
-Detects MIME type based on file content or file extension. [Nuget package](https://www.nuget.org/packages/MimeMagicSharp/ is available. Sample are files included.
+Detects MIME type based on file content or file extension. [Nuget package](https://www.nuget.org/packages/MimeMagicSharp/) is available. Sample are files included.
 
 ## Description
 This project was originally based on parsing  **/usr/share/mime/magic** (Kali Linux) file (**mime database**). Location may differ. More information about this file structure could be found [here](https://developer.gnome.org/shared-mime-info-spec/) ("the magic files" section). 
