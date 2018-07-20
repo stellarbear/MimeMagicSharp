@@ -60,16 +60,15 @@ Rule example:
 //	Database File (new or old)
 string MagicFile = Path.Combine(Environment.CurrentDirectory, "magic"),
 
-using (MimeMagicSharp.CMimeMagicSharp MS = new MimeMagicSharp.CMimeMagicSharp(MagicFile, MimeMagicSharp.EMagicFileType.Json))
+using (MimeMagicSharp.MimeMagicSharp MS = new MimeMagicSharp.MimeMagicSharp(MimeMagicSharp.EMagicFileType.Json, MagicFile))
 {
    try
    {
-      //   Multiple results could be returned
-      List<MimeMagicSharp.CType> ContentMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"));
-
-      //   Only first result will be returned
-      List<MimeMagicSharp.CType> ExtensionMIME = MS.ByContent(Path.Combine(Environment.CurrentDirectory, "MimeMagicSharp.dll"), true);
-        
+		foreach (MimeTypeGuess mimeTypeGuess in ms.AssumeMimeType(EMimeTypeBy.Content,
+                        Path.Combine(Environment.CurrentDirectory, "Newtonsoft.Json.xml")))
+		{
+			//  Iterate over results
+		}
     }
     catch (Exception Ex)
     { 
@@ -79,7 +78,7 @@ using (MimeMagicSharp.CMimeMagicSharp MS = new MimeMagicSharp.CMimeMagicSharp(Ma
 ```
 Convertion from original (old) format to json (new) is supported 
 ```C#
-MimeMagicSharp.CMimeMagicSharp.ConvertFromOriginalToJson("magic_original", "magic_json_convert_test", out string ConvertError);
+MimeMagicSharp.MimeMagicSharp.ConvertFromOriginalToJson("magic_original", "magic_json_convert_test", out string ConvertError);
 ```
 
 ## Limitations

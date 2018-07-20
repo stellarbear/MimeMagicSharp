@@ -81,11 +81,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CMimeMagicSharp.cs" />
-    <Compile Include="CType.cs" />
-    <Compile Include="CReader.cs" />
-    <Compile Include="CRule.cs" />
-    <Compile Include="CRuleSet.cs" />
+    <Compile Include="MimeMagicSharp.cs" />
+    <Compile Include="MimeTypeGuess.cs" />
+    <Compile Include="Reader.cs" />
+    <Compile Include="Rule.cs" />
+    <Compile Include="RuleSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

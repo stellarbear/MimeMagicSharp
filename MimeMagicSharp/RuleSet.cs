@@ -8,22 +8,25 @@ using System.Threading.Tasks;
 namespace MimeMagicSharp
 {
     //  Rule set representation
-    class CRuleSet
+    class RuleSet
     {
-        [JsonProperty("Rule")]  public List<CRule> Rules;
+        [JsonProperty("Rule")]  public List<Rule> Rules;
 
         //  Constructor section
-        public CRuleSet() { Rules = new List<CRule>(); }
-        public CRuleSet(CRule Rule)
+        public RuleSet()
         {
-            Rules = new List<CRule>() { Rule };
+            Rules = new List<Rule>();
+        }
+        public RuleSet(Rule rule)
+        {
+            Rules = new List<Rule>() { rule };
         }
 
         //  Check file header with given rule set
-        public bool CheckType(byte[] InputArray)
+        public bool CheckType(byte[] inputArray)
         {
-            int LevelPointer = 0;
-            List<CRule> LevelRules;
+            int levelPointer = 0;
+            List<Rule> levelRules;
 
             //  Rule set can contain several rules with sertain hierarchy
             //  Level 0. indent 0
@@ -34,20 +37,20 @@ namespace MimeMagicSharp
             do
             {
                 //  Get list of rules for the specified level
-                LevelRules = Rules.Where(x => x.Level == LevelPointer).ToList();
+                levelRules = Rules.Where(x => x.Level == levelPointer).ToList();
 
                 //  If level rules are not empty
-                if (LevelRules.Count > 0)
+                if (levelRules.Count > 0)
                 {
-                    bool IndentRuleResult = LevelRules.Select(x => x.CheckRule(InputArray)).Aggregate((a, b) => a || b);
+                    bool indentRuleResult = levelRules.Select(x => x.CheckRule(inputArray)).Aggregate((a, b) => a || b);
 
                     //  If false => no need to check any further
-                    if (!IndentRuleResult) return false;
+                    if (!indentRuleResult) return false;
                 }
 
-                LevelPointer++;
+                levelPointer++;
             }
-            while (LevelRules.Count > 0);
+            while (levelRules.Count > 0);
 
             return true;
         }
