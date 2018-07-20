@@ -64,11 +64,11 @@ using (MimeMagicSharp.MimeMagicSharp MS = new MimeMagicSharp.MimeMagicSharp(Mime
 {
    try
    {
-		foreach (MimeTypeGuess mimeTypeGuess in ms.AssumeMimeType(EMimeTypeBy.Content,
-                        Path.Combine(Environment.CurrentDirectory, "Newtonsoft.Json.xml")))
-		{
-			//  Iterate over results
-		}
+	foreach (MimeTypeGuess mimeTypeGuess in ms.AssumeMimeType(EMimeTypeBy.Content,
+                    	Path.Combine(Environment.CurrentDirectory, "Newtonsoft.Json.xml")))
+	{
+		//  Iterate over results
+	}
     }
     catch (Exception Ex)
     { 
