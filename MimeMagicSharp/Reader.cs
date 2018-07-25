@@ -225,8 +225,6 @@ namespace MimeMagicSharp
                     yield return type;
                 }
             }
-
-            yield return new MimeTypeGuess(MimeMagicSharp.UnknownMimeType);
         }
         //  Detect mime type base on extension (new format only)
         public IEnumerable<MimeTypeGuess> GetMimeTypeByExtension(string filename)

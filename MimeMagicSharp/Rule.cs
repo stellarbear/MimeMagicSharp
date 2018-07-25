@@ -1,20 +1,17 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MimeMagicSharp
 {
     //  Rule representation
     public class Rule
     {
-        [JsonProperty("Range")]     int _range;
-        [JsonProperty("Offset")]    int _offset;
-        [JsonProperty("Data")]      string _data;
-        [JsonProperty("DataUTF8")]  string _dataUtf8;
-        [JsonProperty("Level")]     public int Level;
+        [JsonProperty("Range")] int _range;
+        [JsonProperty("Offset")] int _offset;
+        [JsonProperty("Data")] string _data;
+        [JsonProperty("DataUTF8")] string _dataUtf8;
+        [JsonProperty("Level")] public int Level;
 
         //  Constructor section
         public Rule()
@@ -43,7 +40,8 @@ namespace MimeMagicSharp
             if (inputArray != null)
             {
                 //  Extract subarray [Offset; Range + Length of signature]
-                byte[] cutArray = inputArray.Skip(_offset).Take(_data.Length + _range).ToArray();
+                //  Length must be divided by 2 in case byte array contatins elements of length 2
+                byte[] cutArray = inputArray.Skip(_offset).Take(_data.Length / 2 + _range).ToArray();
 
                 //  Find substring
                 string cutArrayString = ByteArrayToString(cutArray);
