@@ -11,7 +11,7 @@ namespace MimeMagicSharp
     public class MimeMagicSharp : IDisposable
     {
         private readonly Reader _mimeReader;
-        public static string UnknownMimeType = "[application/unknown]";
+        public static string UnknownMimeType = "application/unknown";
         public static Version Version => Assembly.GetExecutingAssembly().GetName().Version;
 
         public MimeMagicSharp(EMagicFileType magicFileType, string magicFilePath)

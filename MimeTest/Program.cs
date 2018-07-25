@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MimeMagicSharp;
+using System;
 using System.IO;
-using MimeMagicSharp;
 
 namespace MimeTest
 {
@@ -15,7 +14,7 @@ namespace MimeTest
             MimeMagicSharp.MimeMagicSharp.ConvertFromOriginalToJson("magic_original", "magic_json_convert_test");
 
             //  Read and detect
-            using (MimeMagicSharp.MimeMagicSharp ms = 
+            using (MimeMagicSharp.MimeMagicSharp ms =
                 new MimeMagicSharp.MimeMagicSharp(EMagicFileType.Json, jsonMagicFile))
             {
                 try
