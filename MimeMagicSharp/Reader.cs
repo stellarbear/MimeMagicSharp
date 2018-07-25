@@ -215,6 +215,7 @@ namespace MimeMagicSharp
         //  Detect mime type base on file content
         public IEnumerable<MimeTypeGuess> GetMimeTypeByContent(string filename)
         {
+            bool typeGuessed = false;
             byte[] fileHeader = ReadNBytes(filename, 4096);
 
             //  Iteratively check Mime type
@@ -222,13 +223,18 @@ namespace MimeMagicSharp
             {
                 if (type.CheckType(fileHeader))
                 {
+                    typeGuessed = true;
                     yield return type;
                 }
             }
+
+            if (!typeGuessed)
+                yield return new MimeTypeGuess(MimeMagicSharp.UnknownMimeType);
         }
         //  Detect mime type base on extension (new format only)
         public IEnumerable<MimeTypeGuess> GetMimeTypeByExtension(string filename)
         {
+            bool typeGuessed = false;
             string ext = Path.GetExtension(filename)?.ToLower().Replace(".", "");
 
             //  Iteratively check Mime type
@@ -238,12 +244,14 @@ namespace MimeMagicSharp
                 {
                     if (type.Extensions.Contains(ext))
                     {
+                        typeGuessed = true;
                         yield return type;
                     }
                 }
             }
 
-            yield return new MimeTypeGuess(MimeMagicSharp.UnknownMimeType);
+            if (!typeGuessed)
+                yield return new MimeTypeGuess(MimeMagicSharp.UnknownMimeType);
         }
 
         //  Save class to disk (conversion)
