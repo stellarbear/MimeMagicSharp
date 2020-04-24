@@ -58,9 +58,9 @@ Rule example:
 ## Usage
 ```C#
 //	Database File (new or old)
-string MagicFile = Path.Combine(Environment.CurrentDirectory, "magic"),
+string MagicFile = Path.Combine(Environment.CurrentDirectory, "magic");
 
-using (MimeMagicSharp.MimeMagicSharp MS = new MimeMagicSharp.MimeMagicSharp(MimeMagicSharp.EMagicFileType.Json, MagicFile))
+using (MimeMagicSharp.MimeMagicSharp ms = new MimeMagicSharp.MimeMagicSharp(MimeMagicSharp.EMagicFileType.Json, MagicFile))
 {
    try
    {
